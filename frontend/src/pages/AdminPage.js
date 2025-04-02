@@ -41,8 +41,14 @@ const mockListings = [
   }
 ];
 
+const STORAGE_KEY = 'internetListings';
+
 const AdminPage = () => {
-  const [listings, setListings] = useState(mockListings);
+  const [listings, setListings] = useState(() => {
+    // Initialize from localStorage if available, otherwise use mock data
+    const savedListings = localStorage.getItem(STORAGE_KEY);
+    return savedListings ? JSON.parse(savedListings) : mockListings;
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editingListing, setEditingListing] = useState(null);
@@ -58,14 +64,20 @@ const AdminPage = () => {
     isGold: false
   });
 
+  // Save listings to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(listings));
+  }, [listings]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
       if (editingListing) {
         // Update existing listing
-        setListings(listings.map(listing => 
+        const updatedListings = listings.map(listing => 
           listing.id === editingListing.id ? { ...formData, id: listing.id } : listing
-        ));
+        );
+        setListings(updatedListings);
       } else {
         // Add new listing
         const newListing = {

@@ -131,7 +131,10 @@ app.delete('/api/internet-listings/:id', async (req, res) => {
 });
 
 // Serve HTML pages
-app.get("/", (req, res) => res.redirect("/internet-listing"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
 app.get("/admin", (req, res) => res.sendFile(path.join(__dirname, "public", "admin.html")));
 app.get("/add", (req, res) => res.sendFile(path.join(__dirname, "public", "addListing.html")));
 app.get("/internet-listing", (req, res) => res.sendFile(path.join(__dirname, "public", "internetListing.html")));
