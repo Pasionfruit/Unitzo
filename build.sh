@@ -19,6 +19,10 @@ echo "📦 Building backend..."
 cd ../backend
 npm install
 
+# Copy database file to backend directory for production
+echo "📁 Copying database file..."
+cp ../providers.db .
+
 # Return to root directory
 cd ..
 

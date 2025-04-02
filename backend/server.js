@@ -10,18 +10,12 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the frontend build directory in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-  
-  // Handle React routing, return all requests to React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-  });
-}
-
 // Database setup
-const db = new sqlite3.Database(path.join(__dirname, 'providers.db'), (err) => {
+const dbPath = process.env.NODE_ENV === 'production' 
+  ? path.join(__dirname, 'providers.db')
+  : path.join(__dirname, '../providers.db');
+
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Error opening database:', err);
     return;
@@ -110,6 +104,34 @@ app.delete('/api/providers/:id', (req, res) => {
   });
 });
 
+// Serve static files from the frontend build directory in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendBuild = path.join(__dirname, '../frontend/build');
+  
+  // Check if frontend build exists
+  if (require('fs').existsSync(frontendBuild)) {
+    app.use(express.static(frontendBuild));
+    
+    // Handle React routing, return all requests to React app
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(frontendBuild, 'index.html'));
+    });
+  } else {
+    console.error('Frontend build directory not found!');
+    app.get('*', (req, res) => {
+      res.status(500).send('Frontend build not found. Please ensure the build process completed successfully.');
+    });
+  }
+}
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!' });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`Database path: ${dbPath}`);
 }); 
