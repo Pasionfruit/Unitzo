@@ -17,7 +17,9 @@ npm run build
 # Build backend
 echo "📦 Building backend..."
 cd ../backend
+rm -rf node_modules
 npm install
+npm rebuild sqlite3
 
 # Copy database file to backend directory for production
 echo "📁 Copying database file..."
