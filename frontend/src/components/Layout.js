@@ -18,6 +18,9 @@ const Layout = ({ children }) => {
               <Link to="/about" className={styles.navLink}>
                 About
               </Link>
+              <Link to="/admin" className={styles.navLink}>
+                Admin
+              </Link>
             </div>
           </nav>
         </div>

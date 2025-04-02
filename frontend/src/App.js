@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import ListingsPage from './ListingsPage';
+import AdminPage from './pages/AdminPage';
 import './styles/global.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<ListingsPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </Layout>
   );

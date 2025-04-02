@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from './components/Card';
 import ProviderCard from './components/ProviderCard';
@@ -203,36 +203,9 @@ const providers = [
 ];
 
 const ListingsPage = () => {
-  const [listings, setListings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        // In development, use mock data
-        if (process.env.NODE_ENV === 'development') {
-          setListings(mockListings);
-          setLoading(false);
-          return;
-        }
-
-        const response = await fetch('/api/internet-listings');
-        if (!response.ok) {
-          throw new Error('Failed to fetch listings');
-        }
-        const data = await response.json();
-        setListings(data);
-      } catch (err) {
-        console.error('Error fetching listings:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchListings();
-  }, []);
+  const [listings] = useState(mockListings);
+  const [loading] = useState(false);
+  const [error] = useState(null);
 
   if (loading) {
     return <LoadingSpinner />;
