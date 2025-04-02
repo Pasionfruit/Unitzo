@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import ListingsPage from './ListingsPage';
+import ListingsPage from './pages/ListingsPage';
 import AdminPage from './pages/AdminPage';
 import './styles/global.css';
 

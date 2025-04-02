@@ -77,4 +77,14 @@
 .cardBody img {
   max-height: 125px !important;
   max-width: 150px !important;
+}
+
+.cardBody {
+  padding: 20px;
+  padding-bottom: 10px;
+}
+
+.buttonContainer {
+  margin-top: 15px;
+  padding-bottom: 10px;
 } 

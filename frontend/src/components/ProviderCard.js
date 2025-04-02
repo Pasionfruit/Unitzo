@@ -44,14 +44,16 @@ const ProviderCard = ({
           <div className="col-md-3 text-center">
             <p className="mb-1 small">Pricing starting from</p>
             <p className={styles.price}>{price}</p>
-            <a 
-              href={offerUrl} 
-              className="btn btn-primary btn-lg" 
-              target="_blank" 
-              rel="noopener noreferrer nofollow"
-            >
-              View Plans
-            </a>
+            <div className={styles.buttonContainer}>
+              <a 
+                href={offerUrl} 
+                className="btn btn-primary btn-lg" 
+                target="_blank" 
+                rel="noopener noreferrer nofollow"
+              >
+                View Plans
+              </a>
+            </div>
           </div>
         </div>
       </div>

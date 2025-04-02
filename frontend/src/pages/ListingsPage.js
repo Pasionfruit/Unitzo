@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Card from './components/Card';
-import ProviderCard from './components/ProviderCard';
+import Card from '../components/Card';
+import ProviderCard from '../components/ProviderCard';
 import styles from './ListingsPage.module.css';
 
 const LoadingSpinner = () => (
