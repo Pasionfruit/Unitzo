@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../components/Card';
 import ProviderCard from '../components/ProviderCard';
+import { getAllProviders } from '../utils/db';
 import styles from './ListingsPage.module.css';
 
 const LoadingSpinner = () => (
@@ -203,9 +204,25 @@ const providers = [
 ];
 
 const ListingsPage = () => {
-  const [listings] = useState(mockListings);
-  const [loading] = useState(false);
-  const [error] = useState(null);
+  const [providers, setProviders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProviders = async () => {
+      try {
+        const data = await getAllProviders();
+        setProviders(data);
+      } catch (err) {
+        setError('Failed to load providers. Please try again later.');
+        console.error('Error fetching providers:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProviders();
+  }, []);
 
   if (loading) {
     return <LoadingSpinner />;
