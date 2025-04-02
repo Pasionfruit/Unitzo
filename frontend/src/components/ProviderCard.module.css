@@ -1,0 +1,80 @@
+.card {
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.goldCard {
+  border: 2px solid #FFD700;
+}
+
+.providerHeader {
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+}
+
+.goldHeader {
+  background-color: #FFD700;
+}
+
+.goldHeader .providerTitle {
+  color: #000;
+}
+
+.darkHeader {
+  background-color: #000;
+}
+
+.darkHeader .providerTitle {
+  color: #fff;
+}
+
+.providerTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.starRating {
+  color: #007bff;
+}
+
+.starRating .filled {
+  color: #FFD700;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.speedText {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.maxSpeed {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.descriptionItem {
+  margin-bottom: 8px;
+}
+
+.descriptionItem i {
+  color: #28a745;
+  margin-right: 8px;
+}
+
+.cardBody img {
+  max-height: 125px !important;
+  max-width: 150px !important;
+} 
